@@ -1,15 +1,18 @@
-import { Outlet } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Outlet } from "react-router"
+import "../../styles/app.css"
+import Sidebar from "./Siderbar"
 
 export default function Root() {
   return (
-    <>
-      <Link to={'/welcome'}>欢迎</Link>
-      <br />
-      <Link to={'/'}>首页</Link>
-      <section>
-        <Outlet />
-      </section>
-    </>
+    <div className="flex flex-col">
+      <main className="flex">
+        <div className="w-[48px] overflow-hidden">
+          <Sidebar></Sidebar>
+        </div>
+        <section>
+          <Outlet />
+        </section>
+      </main>
+    </div>
   )
 }
