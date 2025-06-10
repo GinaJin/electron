@@ -1,0 +1,17 @@
+.disk {
+  .preview {
+    background-color: #f5f6f7;
+    border-radius: 4px;
+    overflow-y: scroll;
+    .fileInfo {
+      display: flex;
+      align-items: center;
+      padding: 8px 40px 8px 16px;
+    }
+    .folderIcon {
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+    }
+  }
+}
