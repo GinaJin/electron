@@ -1,4 +1,5 @@
 .disk {
+  --selectedBgColor: rgb(42, 98, 217);
   .preview {
     background-color: #f5f6f7;
     border-radius: 4px;
@@ -7,6 +8,10 @@
       display: flex;
       align-items: center;
       padding: 8px 40px 8px 16px;
+      &.selected {
+        background-color: var(--selectedBgColor);
+        color: white;
+      }
     }
     .folderIcon {
       width: 24px;

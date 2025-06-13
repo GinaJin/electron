@@ -1,4 +1,4 @@
-import { ipcRenderer } from 'electron'
+import { ipcRenderer } from "electron"
 
 const api = {
   send: (channel: string, ...args: any[]) => {
@@ -12,6 +12,9 @@ const api = {
   },
   removeAllListeners: (channel: string) => {
     ipcRenderer.removeAllListeners(channel)
+  },
+  openFileDialog: () => {
+    return ipcRenderer.invoke("dialog:openFile")
   },
 }
 

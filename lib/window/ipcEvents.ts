@@ -1,5 +1,5 @@
-import { readDir } from "@/lib/main/dirs"
-import { type BrowserWindow, ipcMain, session, shell } from "electron"
+import { createDir, readDir } from "@/lib/main/dirs"
+import { type BrowserWindow, dialog, ipcMain, session, shell } from "electron"
 import os from "os"
 
 const handleIPC = (channel: string, handler: (...args: any[]) => void) => {
@@ -55,16 +55,27 @@ export const registerWindowIPC = (mainWindow: BrowserWindow) => {
     mainWindow.setFullScreen(!mainWindow.fullScreen),
   )
   handleIPC("web-open-url", (_e, url) => shell.openExternal(url))
-
+  handleIPC("dialog:openFile", async () => {
+    const result = await dialog.showOpenDialog({
+      properties: ["openFile"],
+    })
+    return result.filePaths
+  })
   handleIPC("read-dirs", async (_e, { path, showHidden, dirOnly }) => {
     const home = process.env.HOME!
-
     let items = await readDir({
       path: path || home,
       showHidden,
       dirOnly,
     })
     return items
+  })
+  handleIPC("create-dir", async (_e, { path, folderName }) => {
+    let data = await createDir({
+      path,
+      folderName,
+    })
+    return data
   })
   handleIPC("main-dir", async () => {
     const home = process.env.HOME!
